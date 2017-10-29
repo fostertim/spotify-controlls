@@ -1,0 +1,58 @@
+#!/bin/bash
+
+next() {
+	osascript -e 'tell application "Spotify" to next track'
+}
+
+previous() {
+	osascript -e 'tell application "Spotify" to previous track'
+}
+
+play() {
+	osascript -e 'tell application "Spotify" to play'
+}
+
+pause() {
+	osascript  -e 'tell application "Spotify" to pause'
+}
+
+setVolume() {
+	osascript -e 'set volume output volume '$1' --100%'
+}
+
+help() {
+	echo "supported commands:"
+	echo "play"
+	echo "pause"
+	echo "next"
+	echo "previous"
+}
+
+case $1 in
+	next|n)
+		next
+		;;
+	previous|prev)
+		previous
+		;;
+	play)
+		play
+		;;
+	pause)
+		pause
+		;;
+	sv|set-volume)
+		setVolume $2
+		;;
+	help|h)
+		help
+		;;
+	"")
+		echo "please specify a command: "
+		help
+		;;
+	*)
+		echo "command" $1 "not found"
+		help
+		;;
+esac
